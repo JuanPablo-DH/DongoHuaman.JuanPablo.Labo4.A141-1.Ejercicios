@@ -1,25 +1,29 @@
-<!--<div class="container">
-  <div class="row align-items-start">
-    <div class="col-12">
-      <h4>Juan Pablo</h4>
-    </div>
-  </div>
+<div class="container-fluid bg-secondary" style="height: 47px;">
   <div class="row">
-    <div class="col-12 d-flex justify-content-center align-items-center">
-      <div style="text-align: center;">
-        <h4>Laboratorio IV - Ejercicios</h4>
+    <!-- izquierda -->
+    <div class="m-1 col d-flex justify-content-start align-items-center">
+      <button href="#" type="button" class="btn text-white bg-dark" style="white-space: nowrap; margin-right: 8px;" routerLink="calculos-edad">Calculos de Edad</button>
+      <div class="separator"></div> <!-- separador -->
+      <button href="#" type="button" class="btn text-white bg-dark" style="white-space: nowrap; margin-left: 8px; margin-right: 8px" routerLink="bienvenida">Bienvenida</button>
+      <button href="#" type="button" class="btn text-white bg-dark" style="white-space: nowrap; margin-right: 8px;" routerLink="login">Login</button>
+      <button href="#" type="button" class="btn text-white bg-dark" style="white-space: nowrap; margin-right: 8px;" routerLink="registro">Registrarse</button>
+      <button href="#" type="button" class="btn text-white bg-dark" style="white-space: nowrap; margin-right: 8px;" routerLink="error">Error</button>
+      <button href="#" type="button" class="btn text-white bg-dark" style="white-space: nowrap;" (click)="cerrarSesion()" >Cerrar Sesion</button>
+    </div>
+
+    <!-- centro -->
+    <div class="m-1 col d-flex justify-content-center align-items-center">
+      <!-- por si se me ocurre algo en el centro -->
+    </div>
+    
+    <!-- derecha -->
+    <div class="m-1 col d-flex justify-content-end align-items-center">
+      <div class="m-1 col d-flex justify-content-end align-items-center">
+        <span class="text-white">Juan Pablo Dongo Huaman</span>
       </div>
     </div>
   </div>
 </div>
-<hr />
-<button routerLink="calculos-edad" class="btn btn-dark m-1">Ejercicio 01</button>
-<button routerLink="login" class="btn btn-dark m-1">/login</button>
-<button routerLink="registro" class="btn btn-dark m-1">/registro</button>
-<button routerLink="bienvenido" class="btn btn-dark m-1">/bienvenido</button>
-<button routerLink="error" class="btn btn-dark m-1">/error</button>
-<button routerLink="dfgfdgfdgfdgfdgfdgdfg" class="btn btn-dark m-1">/sdfsdfdsfsdfdsf</button>
-<hr />
-<router-outlet /> -->
+<router-outlet />
+<!-- https://bbbootstrap.com/snippets/navigation-bar-brand-logo-and-name-39723760 -->
 
-<app-home></app-home>

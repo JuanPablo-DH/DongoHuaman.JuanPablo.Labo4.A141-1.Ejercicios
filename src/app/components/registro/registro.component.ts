@@ -12,22 +12,19 @@ import { UsuarioController } from '../../classes/usuarioController';
   styleUrl: './registro.component.css'
 })
 export class RegistroComponent {
-  public formUsuario:Usuario;
-  private usuarioController:UsuarioController;
+  public nombre:string = "";
+  public email:string = "";
+  public clave:string = "";
 
-  constructor(private router: Router)
-  {
-    this.formUsuario = new Usuario();
-    this.usuarioController = new UsuarioController();
-  }
+  constructor(private router: Router) { }
 
-  public Registrar()
+  public registrar()
   {
     let usuario:Usuario;
 
     try
     {
-      usuario = this.usuarioController.crear(this.formUsuario.getEmail(), this.formUsuario.getClave());
+      usuario = UsuarioController.crearParaRegistro(this.nombre, this.email, this.clave);
     }
     catch(error)
     {
@@ -35,13 +32,12 @@ export class RegistroComponent {
       return;
     }
 
-    if(Usuario.insertar(usuario))
+    if(UsuarioController.registrar(usuario) === false)
     {
-      alert("INSERCION EXITOSA");
+      alert("Registrar ERROR");
+      return;
     }
-    else
-    {
-      alert("INSERCION FALLADA")
-    }
+    
+    alert("Registrar EXITO");
   }
 }

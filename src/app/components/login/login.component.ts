@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { environment } from '../../../environments/environment';
 import { Usuario } from '../../classes/usuario';
 import { UsuarioController } from '../../classes/usuarioController';
 
@@ -14,22 +13,18 @@ import { UsuarioController } from '../../classes/usuarioController';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  public formUsuario:Usuario;
-  private usuarioController:UsuarioController;
+  public email:string = "";
+  public clave:string = "";
 
-  constructor(private router: Router)
-  {
-    this.formUsuario = new Usuario();
-    this.usuarioController = new UsuarioController();
-  }
+  constructor(private router: Router) { }
 
-  public Logear()
+  public logear()
   {
     let usuario:Usuario;
 
     try
     {
-      usuario = this.usuarioController.crear(this.formUsuario.getEmail(), this.formUsuario.getClave());
+      usuario = UsuarioController.crearParaLogin(this.email, this.clave);
     }
     catch(error)
     {
@@ -37,13 +32,12 @@ export class LoginComponent {
       return;
     }
 
-    if(this.usuarioController.existe(usuario) === false)
+    if(UsuarioController.logear(usuario) === false)
     {
-      alert("No existe el usuario " + usuario.email);
+      alert("Logeo ERROR");
       return;
     }
     
     alert("Bienvenido " + usuario.email);
-    return;
   }
 }

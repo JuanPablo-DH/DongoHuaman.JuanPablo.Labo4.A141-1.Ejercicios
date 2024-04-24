@@ -1,31 +1,59 @@
 export class Usuario
 {
+  public nombre:string;
   public email:string;
   public clave:string;
   
-  constructor(pEmail?: string, pClave?: string)
+  constructor(pNombre?: string, pEmail?: string, pClaveUno?: string)
   {
-      this.email = pEmail || "";
-      this.clave = pClave || "";
+    this.nombre = pNombre || "";
+    this.email = pEmail || "";
+    this.clave = pClaveUno || "";
   }
 
-  public setEmail(pEmail: string) : void
+  private static validarNombre(pNombre:string) : void
   {
-    pEmail = pEmail.toLowerCase();
-
-    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(pEmail)) {
+    if (!/^[a-zA-Z0-9]+$/.test(pNombre))
+    {
+      throw "El nombre debe tener letras y/o numeros";
+    }
+  }
+  private static validarEmail(pEmail:string) : void
+  {
+    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(pEmail))
+    {
       throw "Email no válido";
     }
+  }
+  private static validarClave(pClave:string) : void
+  {
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,}$/.test(pClave))
+    {
+      throw "La contraseña debe tener al menos 3 caracteres, incluyendo al menos una letra y un numero";
+    }
+  }
+
+  public setNombre(pNombre:string) : void
+  {
+    pNombre.toUpperCase();
+
+    Usuario.validarNombre(pNombre);
+
+    this.nombre = pNombre;
+  }
+  public setEmail(pEmail: string) : void
+  {
+    pEmail.toLowerCase();
+
+    Usuario.validarEmail(pEmail);
 
     this.email = pEmail;
   }
-  public setClave(pClave: string) : void
+  public setClave(pClaveUno: string) : void
   {
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,}$/.test(pClave)) {
-      throw "La contraseña debe tener al menos 3 caracteres, incluyendo al menos una letra y un numero";
-    }
+    Usuario.validarClave(pClaveUno)
 
-    this.clave = pClave;
+    this.clave = pClaveUno;
   }
   public getEmail() : string
   {
@@ -36,9 +64,21 @@ export class Usuario
     return this.clave;
   }
 
-  public equals(pUsuario:Usuario) : boolean
+  private equals(pUsuario:Usuario, pTipoCriterio:string) : boolean
   {
-    return ((this.email === pUsuario.email && this.clave === pUsuario.clave));
+    pTipoCriterio.toLowerCase();
+
+    switch(pTipoCriterio)
+    {
+      case "login":
+        return (this.email === pUsuario.email && this.clave === pUsuario.clave);
+
+      case "registrar":
+        return (this.email === pUsuario.email);
+
+      default:
+        return false;
+    }
   }
 
   public static jsonToLista(pJsonLista:string) : Usuario[]
@@ -48,9 +88,9 @@ export class Usuario
 
       for (let i = 0; i < lista.length; i++)
       {
-        if (lista[i].email && lista[i].clave)
+        if (lista[i].nombre && lista[i].email && lista[i].clave)
         {
-          ret.push(new Usuario(lista[i].email, lista[i].clave));
+          ret.push(new Usuario(lista[i].nombre, lista[i].email, lista[i].clave));
         }
       }
 
@@ -60,15 +100,47 @@ export class Usuario
   {
     let usuario = JSON.parse(pJsonInstancia);
 
-    if(usuario.email && usuario.clave)
+    if(usuario.nombre && usuario.email && usuario.clave)
     {
-      return new Usuario(usuario.email, usuario.clave);
+      return new Usuario(usuario.nombre, usuario.email, usuario.clave);
     }
 
     return new Usuario();
   }
 
-  public static traerTodos() : Usuario[]
+  public static logear(pUsuario:Usuario) : boolean
+  {
+    let bdUsuarios = Usuario.bdSelectAll();
+
+    console.log(bdUsuarios);
+
+    for(let i=0; i<bdUsuarios.length; i++)
+    {
+      if(bdUsuarios[i].equals(pUsuario, "login"))
+      {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  public static registrar(pUsuario:Usuario) : boolean
+  {
+    let bdUsuarios = Usuario.bdSelectAll();
+
+    for(let i=0; i<bdUsuarios.length; i++)
+    {
+      if(bdUsuarios[i].equals(pUsuario, "registrar"))
+      {
+        return false;
+      }
+    }
+
+    Usuario.bdInsertar(pUsuario);
+    return true;
+  }
+
+  public static bdSelectAll() : Usuario[]
   {
     let jsonTexto = localStorage.getItem("usuarios");
     let listaUsuarios:Usuario[] = [];
@@ -80,38 +152,18 @@ export class Usuario
 
     return Usuario.jsonToLista(jsonTexto);
   }
-  public static existe(pUsuario:Usuario) : boolean
+  private static bdInsertar(pUsuario:Usuario) : void
   {
-    let listaUsuarios = Usuario.traerTodos();
-
-    for (let i = 0; i < listaUsuarios.length; i++)
-    {
-      if (listaUsuarios[i].equals(pUsuario))
-      {
-        return true;
-      }
-    }
-
-    return false;
+    let bdUsuarios = Usuario.bdSelectAll();
+    bdUsuarios.push(pUsuario);
+    localStorage.setItem("usuarios", JSON.stringify(bdUsuarios));
   }
-  public static insertar(pUsuario:Usuario) : boolean
+  private static bdUpdate(pUsuario:Usuario) : void
   {
-    let listaUsuarios = Usuario.traerTodos();
-
-    if(pUsuario)
-    {
-      listaUsuarios.push(pUsuario);
-      localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
-    }
-
-    return Usuario.existe(pUsuario);
+    
   }
-  public static modificar(pUsuario:Usuario) : boolean
+  private static bdDelete(pUsuario:Usuario) : void
   {
-    return false;
-  }
-  public static eliminar(pUsuario:Usuario) : boolean
-  {
-    return false;
+    
   }
 }

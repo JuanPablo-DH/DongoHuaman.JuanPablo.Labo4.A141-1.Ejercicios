@@ -9,18 +9,19 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './calculos-edad.component.css'
 })
 export class CalculosEdadComponent {
-  edadUno : number = 0;
-  edadDos : number = 0;
-  promedio : number = 0;
-  suma : number = 0;
+  edadUno: string = '';
+  edadDos: string = '';
+  promedio: number = 0;
+  suma: number = 0;
 
-  calcular() : void {
-    this.suma = this.edadUno + this.edadDos;
-    this.promedio = (this.edadUno + this.edadDos) / 2;
+  calcular(): void {
+    this.suma = parseInt(this.edadUno) + parseInt(this.edadDos);
+    this.promedio = (parseInt(this.edadUno) + parseInt(this.edadDos)) / 2;
   }
-  limpiar() : void {
-    this.edadUno = 0;
-    this.edadDos = 0;
+
+  limpiar(): void {
+    this.edadUno = '';
+    this.edadDos = '';
     this.promedio = 0;
     this.suma = 0;
   }

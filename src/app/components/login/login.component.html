@@ -3,24 +3,25 @@
     <div class="col-md-6">
       <div class="card px-5 py-5" id="form1">
         <div class="form-data" v-if="!submitted">
+          <!-- Email -->
           <div class="forms-inputs mb-4">
             <span>Email</span>
             <input autocomplete="off"
-                   class="w-50"
-                   [(ngModel)]="formUsuario.email">
+                   class="form-control"
+                   [(ngModel)]="email">
           </div>
+          <!-- Clave -->
           <div class="forms-inputs mb-4">
             <span>Contraseña</span>
             <input autocomplete="off"
-                   class="w-50"
+                   class="form-control"
                    type="password"
-                   [(ngModel)]="formUsuario.clave">
+                   [(ngModel)]="clave">
           </div>
+          <!-- Iniciar sesion -->
           <div class="mb-3">
-            <button v-on:click.stop.prevent="submit"
-                    class="btn btn-dark w-50"
-                    (click)="Logear()">Iniciar Sesión</button>
-          </div>
+            <button class="btn btn-dark w-100"
+                    (click)="logear()">Iniciar Sesion</button>
         </div>
       </div>
     </div>

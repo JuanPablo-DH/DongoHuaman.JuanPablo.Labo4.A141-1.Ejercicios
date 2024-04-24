@@ -1,3 +1,1 @@
-export const environment = {
-  usuarioNombre: "¿?"
-};
+export const environment = {};

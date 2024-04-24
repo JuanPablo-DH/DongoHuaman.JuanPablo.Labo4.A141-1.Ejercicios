@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { Usuario } from './classes/usuario';
 import { HomeComponent } from './components/home/home.component';
 
 @Component({
@@ -11,5 +10,10 @@ import { HomeComponent } from './components/home/home.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+  constructor(){ }
+
+  cerrarSesion()
+  {
+    alert("Cerrar Sesion saluda");
+  }
 }

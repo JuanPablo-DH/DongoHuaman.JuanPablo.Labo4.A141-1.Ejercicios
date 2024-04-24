@@ -2,7 +2,7 @@ import { Usuario } from "./usuario";
 
 export class UsuarioController
 {
-  public crear(pEmail:string, pClave:string) : Usuario
+  public static crearParaLogin(pEmail:string, pClave:string) : Usuario
   {
     let ret = new Usuario();
     try
@@ -16,12 +16,27 @@ export class UsuarioController
       throw error;
     }
   }
-  public insertar(pUsuario:Usuario) : boolean
+  public static crearParaRegistro(pNombre:string, pEmail:string, pClave:string) : Usuario
   {
-    return Usuario.insertar(pUsuario);
+    let ret = new Usuario();
+    try
+    {
+      ret.setNombre(pNombre);
+      ret.setEmail(pEmail);
+      ret.setClave(pClave);
+      return ret;
+    }
+    catch(error)
+    {
+      throw error;
+    }
+  }  
+  public static logear(pUsuario:Usuario) : boolean
+  {
+    return Usuario.logear(pUsuario);
   }
-  public existe(pUsuario:Usuario) : boolean
+  public static registrar(pUsuario:Usuario) : boolean
   {
-    return Usuario.existe(pUsuario);
+    return Usuario.registrar(pUsuario);
   }
 }
