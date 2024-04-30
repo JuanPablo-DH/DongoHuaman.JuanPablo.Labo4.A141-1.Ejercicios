@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="card px-5 py-5" id="form1">
+        <div class="form-data">
+          <!-- Edad uno -->
+          <div class="forms-inputs mb-4">
+            <span>Edad Uno</span>
+            <input type="number" class="form-control" [(ngModel)]="edadUno">
+          </div>
+          <!-- Edad dos -->
+          <div class="forms-inputs mb-4">
+            <span>Edad Dos</span>
+            <input type="number" class="form-control" [(ngModel)]="edadDos">
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-dark w-100" (click)="calcular()">Calcular</button>
+          </div>
+          <!-- Resultado promedio -->
+          <div class="mb-3">
+            <span>Promedio:</span>
+            <input type="text" class="form-control" [(ngModel)]="promedio" disabled>
+          </div>
+          <!-- Resultado suma -->
+          <div class="mb-3">
+            <span>Suma:</span>
+            <input type="text" class="form-control" [(ngModel)]="suma" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

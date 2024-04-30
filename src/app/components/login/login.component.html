@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="card px-5 py-5" id="form1">
+        <div class="form-data" v-if="!submitted">
+          <!-- Email -->
+          <div class="forms-inputs mb-4">
+            <span>Email</span>
+            <input autocomplete="off"
+                   class="form-control"
+                   [(ngModel)]="email">
+          </div>
+          <!-- Clave -->
+          <div class="forms-inputs mb-4">
+            <span>Contraseña</span>
+            <input autocomplete="off"
+                   class="form-control"
+                   type="password"
+                   [(ngModel)]="clave">
+          </div>
+          <!-- Iniciar sesion -->
+          <div class="mb-3">
+            <button class="btn btn-dark w-100"
+                    (click)="logear()">Iniciar Sesion</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

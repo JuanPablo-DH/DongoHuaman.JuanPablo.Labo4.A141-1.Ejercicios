@@ -1,0 +1,22 @@
+<p>hijo-mostrar works!</p>
+
+@if(logged) {
+  <button (click)="logged = false">Log out</button>
+} @else {
+  <button (click)="logged = true">Log in</button>
+}
+
+<p> Estado del login: {{ logged }}</p>
+
+<hr />
+
+<table>
+  <thead>
+    <th>Nombre</th>
+  </thead>
+  <tbody>
+    @for (nombre of array; track nombre) {
+       {{ nombre }}<br>
+    }
+  </tbody>
+</table>

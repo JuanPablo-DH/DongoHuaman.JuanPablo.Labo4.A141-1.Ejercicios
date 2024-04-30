@@ -1,0 +1,13 @@
+<p>padre works!</p>
+
+<hr />
+
+<app-hijo-input [variableHijo]="variablePadre" [arrayHijo]="arrayNombres" (agregarEvent)="recibirAgregar($event)"></app-hijo-input>
+
+<hr />
+
+<app-hijo-output></app-hijo-output>
+
+<hr />
+
+<app-hijo-mostrar [array]="arrayNombres"></app-hijo-mostrar>
