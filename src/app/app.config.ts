@@ -12,14 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(
       provideFirebaseApp(() =>
-        initializeApp({
-          apiKey: 'AIzaSyC6fV1YQRa0oDkHtcQXHUMC4WrALDg6d80',
-          authDomain: 'lab4-ejercicios-9dc29.firebaseapp.com',
-          projectId: 'lab4-ejercicios-9dc29',
-          storageBucket: 'lab4-ejercicios-9dc29.appspot.com',
-          messagingSenderId: '341745439943',
-          appId: '1:341745439943:web:628ae2469b4ab24853dae2',
-        })
+        initializeApp()
       )
     ),
     importProvidersFrom(provideAuth(() => getAuth())),
